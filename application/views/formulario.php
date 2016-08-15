@@ -7,8 +7,14 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="assets/css/bootstrap.css">
+        <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.css')?>">
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <title></title>
+        <script>
+        function busca_cidades(id_departamento){
+        alert(id_departamento);
+        }
+        </script>
     </head>
     <body>
         <?php
@@ -26,18 +32,9 @@ and open the template in the editor.
   
         ?>
         
-        <label for="cod_estados">Estado:</label>
-        <select name="cod_estados" id="cod_estados">
-	<option value=""></option>
-            <?php
-                    $sql = "SELECT cod_estados, sigla
-                                    FROM estados
-                                    ORDER BY sigla";
-                    $res = mysql_query( $sql );
-                    while ( $row = mysql_fetch_assoc( $res ) ) {
-                            echo '<option value="'.$row['cod_estados'].'">'.$row['sigla'].'</option>';
-                    }
-            ?>
+        <label for="estados">Estado:</label>
+        <select name="estados" id="cod_estados" onchange='busca_cidades($(this).val())'>
+            <?= $options_estados; ?>
         </select>
 
         <label for="cod_cidades">Cidade:</label>
@@ -46,6 +43,15 @@ and open the template in the editor.
         </select>
         
     </body>
+    
+    <!--
+    $sql = "SELECT cod_estados, sigla
+                                    FROM estados
+                                    ORDER BY sigla";
+                    $res = mysqli_query( $sql );
+                    while ( $row = mysqli_fetch_assoc( $res ) ) {
+                            echo '<option value="'.$row['cod_estados'].'">'.$row['sigla'].'</option>';
+                    }
     
     $(function(){
 	$('#cod_estados').change(function(){
@@ -64,6 +70,6 @@ and open the template in the editor.
 			$('#cod_cidades').html('<option value="">-- Escolha um estado --</option>');
 		}
 	});
-    });
+    });-->
     
 </html>

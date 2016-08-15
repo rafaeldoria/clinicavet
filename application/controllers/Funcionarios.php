@@ -11,10 +11,24 @@
  *
  * @author Rafael
  */
-class Funcionarios extends CI_Controller{
-    
-    public function formulario(){
-        $this->load->view("formulario");
+class Funcionarios extends CI_Controller {
+
+    public function index() {
+        $this->load->view("includes/header");
+        $this->load->view("includes/menu");
+        //$this->load->view("includes/sidibar");
+        
+        $this->load->model("form_model");
+        $estados = $this->form_model->busca_estados();
+
+        $option = "<option value=''></option>";
+        foreach ($estados->result() as $estado) {
+            $option .= "<option value='$estado->siglaestado'>$estado->siglaestado</option>";
+        }
+        $dados['options_estados'] = $option;       
+
+        $this->load->view("formulario", $dados);
+        $this->load->view("includes/footer");
     }
-    
+
 }

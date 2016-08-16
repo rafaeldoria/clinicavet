@@ -18,17 +18,30 @@ class Funcionarios extends CI_Controller {
         $this->load->view("includes/menu");
         //$this->load->view("includes/sidibar");
         
+        
         $this->load->model("form_model");
-        $estados = $this->form_model->busca_estados();
-
+        $estados = $this->form_model->retorna_estados();
         $option = "<option value=''></option>";
-        foreach ($estados->result() as $estado) {
-            $option .= "<option value='$estado->siglaestado'>$estado->siglaestado</option>";
+        foreach ($estados->result() as $linha) {
+            $option .= "<option value='$linha->idestados'>$linha->siglaestado</option>";
         }
-        $dados['options_estados'] = $option;       
-
+        $dados ['estados'] = $option;
         $this->load->view("formulario", $dados);
         $this->load->view("includes/footer");
+    }
+
+    public function busca_cidades_por_estados() {
+
+        $this->load->model("form_model");
+
+        $cidades = $this->form_model->retorna_cidades_por_estados();
+
+        $option = "<option value=''></option>";
+        foreach ($cidades->result() as $linha) {
+            $option .= "<option value='$linha->idcidade'>$linha->nomecidade</option>";
+        }
+
+        echo $option;
     }
 
 }

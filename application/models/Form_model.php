@@ -17,18 +17,20 @@ class Form_model extends CI_Controller {
         parent::__construct();
     }
 
-    /*public function retorna_departamentos() {
-
-        $this->db->order_by("departamentos_nome", "asc");
-        $consulta = $this->db->get("departamentos");
+    public function retorna_estados() {
+        $this->db->order_by("nomeestado", "asc");
+        $consulta = $this->db->get("estados");
 
         return $consulta;
-    }*/
+    }
 
-    public function busca_estados() {
-        $this->db->order_by("siglaestado", "asc");
-        $estados = $this->db->get("estados");
-        return  $estados;
+    public function retorna_cidades_por_estados() {
+        $id_estado = $this->input->post("id_estado");
+        $this->db->where("estados_idestados", $id_estado);
+        $this->db->order_by("nomecidade", "asc");
+        $consulta = $this->db->get("cidades");
+
+        return $consulta;
     }
 
 }

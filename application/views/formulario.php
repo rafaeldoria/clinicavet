@@ -7,19 +7,26 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.css')?>">
+        <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.css') ?>">
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <title></title>
         <script>
-        function busca_cidades(id_departamento){
-        alert(id_departamento);
-        }
+
+
+            function busca_estados(id_estado) {
+
+                $.post("http://localhost/clinicavet/funcionarios/busca_cidades_por_estados", {
+                    id_estado: id_estado
+                }, function (data) {
+                    $('#cidades').html(data);
+                });
+            }
         </script>
     </head>
     <body>
+        
         <?php
         echo form_open("funcionarios/novo");
-
         echo form_label("Nome :", "nome");
         echo form_input(array(
                 "name" => "nome",
@@ -31,45 +38,18 @@ and open the template in the editor.
         echo form_error("nome"); 
   
         ?>
-        
-        <label for="estados">Estado:</label>
-        <select name="estados" id="cod_estados" onchange='busca_cidades($(this).val())'>
-            <?= $options_estados; ?>
-        </select>
 
-        <label for="cod_cidades">Cidade:</label>
-        <select name="cod_cidades" id="cod_cidades">
-                <option value="">-- Escolha uma Cidade --</option>
-        </select>
+        <label for="estados">Estado:</label>           
+            <select name="estados" id="estados" onchange='busca_estados($(this).val())'>
+                <?= $estados; ?>
+            </select>
         
+        <label for="cod_cidades">Cidade:</label>            
+            <select name="cidades" id="cidades">
+            </select>
+        </p>
+
+
     </body>
-    
-    <!--
-    $sql = "SELECT cod_estados, sigla
-                                    FROM estados
-                                    ORDER BY sigla";
-                    $res = mysqli_query( $sql );
-                    while ( $row = mysqli_fetch_assoc( $res ) ) {
-                            echo '<option value="'.$row['cod_estados'].'">'.$row['sigla'].'</option>';
-                    }
-    
-    $(function(){
-	$('#cod_estados').change(function(){
-		if( $(this).val() ) {
-			$('#cod_cidades').hide();
-			$('.carregando').show();
-			$.getJSON('cidades.ajax.php?search=',{cod_estados: $(this).val(), ajax: 'true'}, function(j){
-				var options = '<option value=""></option>';	
-				for (var i = 0; i < j.length; i++) {
-					options += '<option value="' + j[i].cod_cidades + '">' + j[i].nome + '</option>';
-				}	
-				$('#cod_cidades').html(options).show();
-				$('.carregando').hide();
-			});
-		} else {
-			$('#cod_cidades').html('<option value="">-- Escolha um estado --</option>');
-		}
-	});
-    });-->
-    
+
 </html>

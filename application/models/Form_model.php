@@ -11,11 +11,7 @@
  *
  * @author PC Niiel
  */
-class Form_model extends CI_Controller {
-
-    function __construct() {
-        parent::__construct();
-    }
+class Form_model extends CI_Model {
 
     public function retorna_estados() {
         $this->db->order_by("nomeestado", "asc");
@@ -31,6 +27,10 @@ class Form_model extends CI_Controller {
         $consulta = $this->db->get("cidades");
 
         return $consulta;
+    }
+
+    public function salva_funcao($funcao) {
+        $this->db->insert("funcoes", $funcao);
     }
 
 }

@@ -1,8 +1,7 @@
-<?php 
+<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
-<!-- userdata : usa sessão -->
-<?php if(!$this->session->userdata("usuario_logado")) : ?> 
+
 <h1>ENTRAR</h1>
 <?php
 echo form_open("login/autenticar");
@@ -30,14 +29,18 @@ echo form_password(array(
 echo form_error("senha");
 ?><br/>
 <?php
-
 echo form_button(array(
     "class" => "btn btn-primary",
     "content" => "Login",
-    "type" => "submit",    
+    "type" => "submit",
 ));
-
+?>
+<div>
+</br>
+    <?= anchor('usuarios', 'Cadastrar', array("class" => "btn btn-primary")); ?></li>
+</div>    
+<?php
 echo form_close();
 ?>
 
-<?php endif ?>
+

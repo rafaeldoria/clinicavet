@@ -14,7 +14,11 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#">Configurações</a></li>
-                    <li><a href="#">Perfil</a></li>                    
+                    <li><a href="#">Perfil</a></li>
+                    <li><!-- userdata : usa sessão -->
+                        <?php if ($this->session->userdata("usuario_logado")) : ?> 
+                        <?= anchor('login/logout', 'Logout') ?> 
+                        <?php endif ?>
                 </ul>
                 <form class="navbar-form navbar-right">
                     <input type="text" class="form-control" placeholder="Pesquisar...">

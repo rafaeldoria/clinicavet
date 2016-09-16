@@ -1,4 +1,5 @@
 <?php
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /*
@@ -12,32 +13,34 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  * @author PC Niiel
  */
-class Login extends CI_Controller{
-    
-    public function index(){ 
-    //includes 
-        $this->load->view("includes/header");
-        $this->load->view("includes/menu");
-        //$this->load->view("includes/sidibar");
-        $this->load->view("includes/body");
-  
-        $this->load->view("formulario_login");
-        //includes
-        $this->load->view("includes/footer");
+class Login extends CI_Controller {
+
+    public function index() {
+        if ($this->session->userdata("usuario_logado")) {
+            redirect("/funcionarios");
+        } else {
+            $this->load->template("formulario_login");
+        }
     }
-    
-    public function autenticar(){
+
+    public function autenticar() {
         $this->load->model("usuarios_model");
         $login = $this->input->post("login");
-        $senha = $this->input->post("senha");
+        $senha = md5($this->input->post("senha"));
         $usuario = $this->usuarios_model->buscaLogin($login, $senha);
-        if($usuario){
-            $this->session->set_userdata("usuario_logado", $usuario); // set_userdata "seta" a session
-            $dados = array("mensagem" => "Logado");
-        }else{
-            $dados = array("mensagem" => "Não Logado");
+        if ($usuario) {
+            $this->session->set_userdata("usuario_logado", $usuario);
+            $this->session->set_flashdata("success", "Logado com sucesso");
+        } else {
+            $this->session->set_flashdata("danger", "Usuário ou senha inválida");
         }
-        $this->load->view("index", $dados);
+        redirect("/welcome");
     }
-    
+
+    public function logout() {
+        $this->session->unset_userdata("usuario_logado");
+        $this->session->set_flashdata("success", "Deslogado");
+        redirect("/login");
+    }
+
 }

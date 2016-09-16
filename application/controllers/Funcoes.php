@@ -14,16 +14,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Funcoes extends CI_Controller {
 
     public function index() {
-        //includes 
-        $this->load->view("includes/header");
-        $this->load->view("includes/menu");
-        $this->load->view("includes/sidibar");
-        $this->load->view("includes/body");
+        autorizar();
+        $this->load->template("funcoes_funcionarios");
 
-        $this->load->view("funcoes_funcionarios");
-        
-        //includes
-        $this->load->view("includes/footer");
     }
 
     public function novo() {
@@ -35,7 +28,7 @@ class Funcoes extends CI_Controller {
 
         $this->load->model("form_model");
         $this->form_model->salva_funcao($funcao);
-        redirect("/");
+        redirect("/funcoes");
     }
 
 }

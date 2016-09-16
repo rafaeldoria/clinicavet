@@ -1,4 +1,3 @@
-
 <meta charset="UTF-8">
 <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.css') ?>">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -10,7 +9,7 @@
 $attributes = array(
     "div class" => "form-group",
 );
-echo form_open("funcionarios/novo", $attributes);
+echo form_open("clientes/novo", $attributes);
 
 echo form_label("Nome :", "nome");
 echo form_input(array(
@@ -23,15 +22,6 @@ echo form_input(array(
 ));
 echo form_error("nome");
 
-echo form_label("Email :", "email");
-echo form_input(array(
-    "name" => "email",
-    "class" => "form-control",
-    "id" => "email",
-    "maxlength" => "255",
-    "style" => "width:50%",
-    "value" => set_value("email", "")
-));
 echo form_error("nome");
 
 echo form_label("Endereço :", "endereco");
@@ -56,17 +46,6 @@ echo form_input(array(
 ));
 echo form_error("cep");
 
-echo form_label("Identidade :", "identidade");
-echo form_input(array(
-    "name" => "identidade",
-    "class" => "form-control",
-    "id" => "identidade",
-    "maxlength" => "8",
-    "style" => "width:25%",
-    "value" => set_value("identidade", "")
-));
-echo form_error("identidade");
-
 echo form_label("CPF :", "cep");
 echo form_input(array(
     "name" => "cep",
@@ -76,65 +55,38 @@ echo form_input(array(
     "style" => "width:25%",
     "value" => set_value("cep", "")
 ));
-echo form_error("cep");
+echo form_error("cpf");
 
-echo form_label("Telefone fixo :", "tel_fixo");
+echo form_label("Telefone Contato :", "tel_contato");
 echo form_input(array(
-    "name" => "tel_fixo",
+    "name" => "tel_contato",
     "class" => "form-control",
     "id" => "tel_fixo",
     "maxlength" => "9",
     "style" => "width:25%",
-    "value" => set_value("tel_fixo", "")
+    "value" => set_value("tel_contato", "")
 ));
-echo form_error("tel_fixo");
+echo form_error("tel_contato");
 
-echo form_label("Telefone celular :", "tel_celular");
+echo form_label("Nome do Animal:", "nomeanimal");
 echo form_input(array(
-    "name" => "tel_celular",
+    "name" => "nomeanimal",
     "class" => "form-control",
-    "id" => "tel_celular",
-    "maxlength" => "9",
-    "style" => "width:25%",
-    "value" => set_value("tel_celular", "")
+    "id" => "nomeanimal",
+    "maxlength" => "255",
+    "style" => "width:50%",
+    "value" => set_value("nomeanimal", "")
 ));
-echo form_error("tel_celular");
 
-$js = 'onChange="busca_estados($(this).val())"';
-echo form_label("Estado: ", "estados");
-echo form_dropdown(array(
-    "name" => "estados",
+echo form_label("Idade do Animal:", "idadeanimal");
+echo form_input(array(
+    "name" => "idadeanimal",
     "class" => "form-control",
-    "id" => "estados",
+    "id" => "idadeanimal",    
     "style" => "width:10%",
-        ), $estados, '1', $js
-);
-
-echo form_label("Cidade: ", "cidades");
-echo form_dropdown(array(
-    "name" => "cidades",
-    "class" => "form-control",
-    "id" => "cidades",
-    "style" => "width:25%",
+    "type" => "number",
+    "value" => set_value("idadeanimal", "")
 ));
-
-echo form_label("Função: ", "funcoes");
-echo form_dropdown(array(
-    "name" => "funcoes",
-    "class" => "form-control",
-    "id" => "funcoes",
-    "style" => "width:25%",
-        ), $funcoes
-);
-
-echo form_label("Horário: ", "horarios");
-echo form_dropdown(array(
-    "name" => "horarios",
-    "class" => "form-control",
-    "id" => "horarios",
-    "style" => "width:25%",
-        ), $horarios
-);
 
 ?><br/>
 <?php
@@ -147,3 +99,5 @@ echo form_button(array(
 
 echo form_close();
 ?>
+
+

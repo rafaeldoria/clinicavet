@@ -11,13 +11,10 @@
  *
  * @author PC Niiel
  */
-class Funcionarios_model extends CI_Controller {
-
-    function __construct() {
-        parent::__construct();
-    }
+class Funcionarios_model extends CI_Model {
 
     public function salva($funcionario){
+        autorizar();
         $this->db->insert("funcionarios", $funcionario);
     }
     

@@ -8,5 +8,9 @@ class Funcoes_model extends CI_Model {
 
         return $consulta;
     }
+        
+    public function salva_funcao($funcao) {
+        $this->db->insert("funcoes", $funcao);
+    }
 
 }

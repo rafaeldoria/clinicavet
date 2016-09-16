@@ -14,16 +14,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Contatos extends CI_Controller {
 
     public function index() {
-        //includes 
-        $this->load->view("includes/header");
-        $this->load->view("includes/menu");
-        $this->load->view("includes/sidibar");
-        $this->load->view("includes/body");
-
-        $this->load->view("contatos");
-
-        //includes
-        $this->load->view("includes/footer");
+        autorizar();
+        $this->load->template("contatos");
     }
 
     public function novo() {
@@ -31,7 +23,7 @@ class Contatos extends CI_Controller {
             "tipocontato" => $this->input->post("tipo_contato"));
         $this->load->model("contatos_model");
         $this->contatos_model->salva_contato($contato);
-        redirect("/");        
+        redirect("/contatos");        
     }
 
 }
